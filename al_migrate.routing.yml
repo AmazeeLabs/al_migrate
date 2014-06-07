@@ -1,0 +1,7 @@
+al_migrate.redirector:
+  path: 'redirector/{type}/{old_id}'
+  defaults:
+    _content: '\Drupal\al_migrate\Redirect::redirect'
+    _title: 'Redirect'
+  requirements:
+    _permission: 'access content'

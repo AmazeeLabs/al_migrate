@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * Implements hook_schema()
+ */
+function al_migrate_schema() {
+  $schema = array();
+
+  $schema['al_migrate_maps'] = array(
+    'description' => 'Source - destination ID mappings for migrations',
+    'fields' => array(
+      'source_id' => array(
+        'description' => 'Source ID',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => true,
+      ),
+      'destination_id' => array(
+        'description' => 'Destination ID',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => true,
+      ),
+      'migration' => array(
+        'description' => 'Migration name',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => true,
+      ),
+      'updated' => array(
+        'description' => 'When the item was last time updated/migrated',
+        'type' => 'int',
+        'unsigned' => true,
+        'not null' => true,
+      ),
+      'rollback' => array(
+        'description' => '1 if mapping should have a rollback action, 0 if not - used for already existing destination entities',
+        'type' => 'int',
+        'unsigned' => true,
+        'not null' => true,
+      ),
+    ),
+    'indexes' => array(
+      'source_id_migration' => array('source_id', 'migration'),
+      'destination_id_migration' => array('destination_id', 'migration'),
+      'migration' => array('migration'),
+    ),
+    'unique keys' => array(),
+    'primary key' => array('source_id', 'migration', 'destination_id'),
+  );
+
+  return $schema;
+}

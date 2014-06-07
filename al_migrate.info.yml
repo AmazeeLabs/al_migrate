@@ -1,0 +1,5 @@
+type: module
+name: Amazee Labs migration
+description: 'D8 migration stuff.'
+package: Custom
+core: 8.x
